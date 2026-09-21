@@ -1,10 +1,14 @@
-var test = require('tape');
-var pipeline = require('..').pipeline;
-var stream = require('..');
-var Buffer = require('safe-buffer').Buffer;
+'use strict';
 
-test('supports pipeline', function(t) {
-    t.plan(4);
+var test = require('node:test');
+var assert = require('node:assert');
+
+var stream = require('..');
+var pipeline = stream.pipeline;
+
+test('supports pipeline', function(t, done) {
+    var closed = { transform2: false, writable: false };
+
     var readable = new stream.Readable({
         read: function () {
             this.push(Buffer.from('chunk', 'ascii'));
@@ -17,13 +21,13 @@ test('supports pipeline', function(t) {
     });
     var transform2 = new stream.PassThrough();
     transform2.on('close', function () {
-        t.pass('transform2.close called');
+        closed.transform2 = true;
     });
     var writable = new stream.Writable({
         write: function (chunk, enc, cb) { cb(); }
     });
     writable.on('close', function () {
-        t.pass('writable.close called');
+        closed.writable = true;
     });
 
     pipeline(
@@ -32,7 +36,14 @@ test('supports pipeline', function(t) {
         transform2,
         writable,
         function(err) {
-            t.ok(err);
-            t.equal(err.message, 'fail');
+            assert.ok(err, 'pipeline reports the transform error');
+            assert.equal(err.message, 'fail');
+            // The destroy/close propagation happens on the next ticks after the
+            // pipeline callback, so assert it once the microtask queue drains.
+            setImmediate(function () {
+                assert.ok(closed.transform2, 'transform2 emitted close');
+                assert.ok(closed.writable, 'writable emitted close');
+                done();
+            });
         });
 });

@@ -1,9 +1,10 @@
-var path = require('path');
-var test = require('tape');
-var Buffer = require('safe-buffer').Buffer;
+'use strict';
+
+var test = require('node:test');
+var assert = require('node:assert');
+var inherits = require('inherits');
 
 var Writable = require('..').Writable;
-var inherits = require('inherits');
 
 inherits(TestWritable, Writable);
 
@@ -21,13 +22,12 @@ TestWritable.prototype._write = function(chunk, encoding, cb) {
 
 var buf = Buffer.from([ 88 ]);
 
-test('.writable writing ArrayBuffer', function(t) {
+test('.writable writing ArrayBuffer', function() {
     var writable = new TestWritable();
-    
+
     writable.write(buf);
     writable.end();
-    
-    t.equal(writable._written.length, 1);
-    t.equal(writable._written[0].toString(), 'X')
-    t.end()
+
+    assert.equal(writable._written.length, 1);
+    assert.equal(writable._written[0].toString(), 'X');
 });

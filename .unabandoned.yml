@@ -1,0 +1,28 @@
+schema: 1
+
+package: "@unabandoned/stream-browserify"
+
+upstream:
+  repo: browserify/stream-browserify
+  reason: "no release since 2020-04-16; left pinned to readable-stream 3.x"
+
+summary: >-
+  Node's `stream` module for the browser: the classic `Stream` base class plus
+  the Readable/Writable/Duplex/Transform/PassThrough classes and the
+  `pipeline`/`finished` helpers, for bundles that target environments without
+  Node's built-in streams.
+
+why-forked: >-
+  IT-Tools aliases `stream` to it in the browser bundle, and upstream went quiet
+  carrying readable-stream 3.x - two majors behind - reached through internal
+  `lib/_stream_*.js` paths that 4.x removed. Forked so it consumes
+  @unabandoned/readable-stream (which in turn pulls the adopted buffer and
+  events forks), keeping the whole shim tree current for consumers.
+
+status: active
+
+used-by:
+  - consumer: TheTechNetwork/it-tools
+    purpose: "Vite's browser polyfill for Node's `stream`, reached transitively by bundled libraries."
+
+tags: [browser, stream, shim, node-core-polyfill]
