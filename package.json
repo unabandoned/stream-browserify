@@ -1,27 +1,25 @@
 {
-  "name": "stream-browserify",
+  "name": "@unabandoned/stream-browserify",
   "version": "3.0.0",
   "description": "the stream module from node core for browsers",
   "main": "index.js",
   "dependencies": {
-    "inherits": "~2.0.4",
-    "readable-stream": "^3.5.0"
+    "@unabandoned/readable-stream": "^4.8.3",
+    "inherits": "~2.0.4"
   },
   "devDependencies": {
-    "airtap": "^1.0.2",
-    "safe-buffer": "^5.1.2",
-    "tape": "^4.13.0",
-    "through": "^2.3.8"
+    "@commitlint/cli": "21.2.2",
+    "@commitlint/config-conventional": "21.2.2"
   },
   "scripts": {
-    "test": "node test",
-    "test:browsers": "airtap -- test/index.js"
+    "test": "node --test",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/browserify/stream-browserify.git"
+    "url": "git+https://github.com/unabandoned/stream-browserify.git"
   },
-  "homepage": "https://github.com/browserify/stream-browserify",
+  "homepage": "https://github.com/unabandoned/stream-browserify#readme",
   "keywords": [
     "stream",
     "browser",
@@ -33,22 +31,11 @@
     "url": "http://substack.net"
   },
   "license": "MIT",
-  "testling": {
-    "files": "test/*.js",
-    "browsers": [
-      "ie/8..latest",
-      "firefox/3.5",
-      "firefox/10",
-      "firefox/nightly",
-      "chrome/10",
-      "chrome/latest",
-      "chrome/canary",
-      "opera/12..latest",
-      "opera/next",
-      "safari/5.1..latest",
-      "ipad/6.0..latest",
-      "iphone/6.0..latest",
-      "android-browser/4.2..latest"
-    ]
+  "bugs": {
+    "url": "https://github.com/unabandoned/stream-browserify/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
   }
 }

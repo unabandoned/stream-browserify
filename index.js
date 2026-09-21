@@ -24,14 +24,19 @@ module.exports = Stream;
 var EE = require('events').EventEmitter;
 var inherits = require('inherits');
 
+// readable-stream 4 exposes the stream classes from the package root; the
+// `lib/_stream_*.js` paths this used to reach into were internal to the 3.x
+// layout and no longer exist.
+var readable = require('@unabandoned/readable-stream');
+
 inherits(Stream, EE);
-Stream.Readable = require('readable-stream/lib/_stream_readable.js');
-Stream.Writable = require('readable-stream/lib/_stream_writable.js');
-Stream.Duplex = require('readable-stream/lib/_stream_duplex.js');
-Stream.Transform = require('readable-stream/lib/_stream_transform.js');
-Stream.PassThrough = require('readable-stream/lib/_stream_passthrough.js');
-Stream.finished = require('readable-stream/lib/internal/streams/end-of-stream.js')
-Stream.pipeline = require('readable-stream/lib/internal/streams/pipeline.js')
+Stream.Readable = readable.Readable;
+Stream.Writable = readable.Writable;
+Stream.Duplex = readable.Duplex;
+Stream.Transform = readable.Transform;
+Stream.PassThrough = readable.PassThrough;
+Stream.finished = readable.finished;
+Stream.pipeline = readable.pipeline;
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
