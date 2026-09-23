@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.0.2](https://github.com/unabandoned/stream-browserify/compare/stream-browserify-v4.0.1...stream-browserify-v4.0.2) (2026-09-23)
+
+
+### Bug Fixes
+
+* stop dev-only commits from cutting releases ([#7](https://github.com/unabandoned/stream-browserify/issues/7)) ([acdfdc5](https://github.com/unabandoned/stream-browserify/commit/acdfdc5184d76b1bacd1a5227d96cdce83701240))
+
 ## [4.0.1](https://github.com/unabandoned/stream-browserify/compare/stream-browserify-v4.0.0...stream-browserify-v4.0.1) (2026-09-22)
 
 
