@@ -1,6 +1,10 @@
 {
   "name": "@unabandoned/stream-browserify",
   "version": "4.0.2",
+  "files": [
+    "CHANGELOG.md",
+    "index.js"
+  ],
   "description": "the stream module from node core for browsers",
   "main": "index.js",
   "dependencies": {
