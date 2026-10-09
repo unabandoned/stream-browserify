@@ -1,6 +1,6 @@
 {
   "name": "@unabandoned/stream-browserify",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "files": [
     "CHANGELOG.md",
     "index.js"
