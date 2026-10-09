@@ -2,7 +2,7 @@
 
 the stream module from node core, for browsers!
 
-This module uses [`@unabandoned/readable-stream`](https://github.com/unabandoned/readable-stream), with additions for compatibility with npm packages that use old Node.js stream APIs.
+This module uses [`readable-stream`](https://github.com/unabandoned/readable-stream) (installed from the `@unabandoned/readable-stream` fork), with additions for compatibility with npm packages that use old Node.js stream APIs.
 
 > A maintained fork of [browserify/stream-browserify](https://github.com/browserify/stream-browserify),
 > which has had no release since April 2020. Published as
