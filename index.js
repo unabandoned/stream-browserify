@@ -22,14 +22,24 @@
 module.exports = Stream;
 
 var EE = require('events').EventEmitter;
-var inherits = require('inherits');
 
 // readable-stream 4 exposes the stream classes from the package root; the
 // `lib/_stream_*.js` paths this used to reach into were internal to the 3.x
 // layout and no longer exist.
-var readable = require('@unabandoned/readable-stream');
+var readable = require('readable-stream');
 
-inherits(Stream, EE);
+// What the `inherits` package's browser entry does, inline: this file *is* the
+// browser `stream`, so it must not reach for Node's `util`. `super_` is kept
+// for callers that read it.
+Stream.super_ = EE;
+Stream.prototype = Object.create(EE.prototype, {
+  constructor: {
+    value: Stream,
+    enumerable: false,
+    writable: true,
+    configurable: true
+  }
+});
 Stream.Readable = readable.Readable;
 Stream.Writable = readable.Writable;
 Stream.Duplex = readable.Duplex;

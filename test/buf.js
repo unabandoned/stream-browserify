@@ -2,7 +2,7 @@
 
 var test = require('node:test');
 var assert = require('node:assert');
-var inherits = require('inherits');
+var inherits = require('node:util').inherits;
 
 var Writable = require('..').Writable;
 
